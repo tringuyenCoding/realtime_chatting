@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Realtime Chat</title>
-</head>
-<body>
-  <h1>Welcome to Realtime Chat</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Realtime Chat</title>
+  </head>
+  <body>
+    <h1>Welcome to Realtime Chat</h1>
+    <div class="main">
+      <div class="name"></div>
+
+      <ul class="message-container" id="message-container">
+        <li class="message-left">
+          <p class="message">Lorem, ipsum.</p>
+          <span>bluebird 26 July 10:40</span>
+        </li>
+
+        <li class="message-right">
+          <p class="message">Lorem, ipsum.</p>
+          <span>bluebird 26 July 10:40</span>
+        </li>
+
+        <li class="message-feedback">
+          <p id="feedback" class="feedback">typing ...</p>
+        </li>
+      </ul>
+
+      <form id="message-form" class="message-form">
+        <input
+          type="text"
+          id="message-input"
+          class="message-input"
+          name="message"
+        />
+        <div class="v-divider"></div>
+        <button type="submit" class="send-button">
+          Send <span><i class="fas fa-paper-plane"></i></span>
+        </button>
+      </form>
+
+      <h3 class="clients-total" id="clients-total">Total clients: 2</h3>
+    </div>
+  </body>
 </html>
