@@ -17,7 +17,7 @@ socket.on("clients-total", (data) => {
 });
 
 function sendMessage() {
-  if(messageInput.value === "") return;
+  if (messageInput.value === "") return;
   console.log(messageInput.value);
   const data = {
     name: nameInput.value,
@@ -31,14 +31,13 @@ function sendMessage() {
 }
 
 socket.on("chat-message", (data) => {
-  console.log(data);
   addMessageToUI(false, data);
 });
 
 function addMessageToUI(isOwnMessage, data) {
-  console.log("addMessageToUI", isOwnMessage);
+  clearFeedback();
   const element = `
-    <li class= "${isOwnMessage ? "message-right" : "message-left" }">
+    <li class= "${isOwnMessage ? "message-right" : "message-left"}">
           <p class="message">
             ${data.message}
           </p><span>${data.name} ● ${moment(data.datetime).fromNow()}</span>
@@ -50,4 +49,39 @@ function addMessageToUI(isOwnMessage, data) {
 
 function scrollToBottom() {
   messageContainer.scrollTo(0, messageContainer.scrollHeight);
+}
+
+messageInput.addEventListener("focus", (e) => {
+  socket.emit("feedback", {
+    feedback: `${nameInput.value} is typing a message...`,
+  });
+});
+
+messageInput.addEventListener("keypress", (e) => {
+  socket.emit("feedback", {
+    feedback: `${nameInput.value} is typing a message...`,
+  });
+});
+
+messageInput.addEventListener("blur", (e) => {
+  socket.emit("feedback", {
+    feedback: "",
+  });
+});
+
+socket.on("feedback", (data) => {
+  clearFeedback();
+  const element = `
+        <li class="message-feedback">
+          <p id="feedback" class="feedback">${data.feedback}</p>
+        </li>
+        `;
+
+  messageContainer.innerHTML += element;
+});
+
+function clearFeedback() {
+  document.querySelectorAll('li.message-feedback').forEach(e =>{
+    e.parentNode.removeChild(e);
+  })
 }
